@@ -31,6 +31,20 @@ namespace CitizenRegistry.API.Infrastructure.API.Database.Context
             base.OnModelCreating(modelBuilder);
 
         }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.CreatedAt = DateTimeOffset.UtcNow;
+                }
+            }
+  
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 
 }

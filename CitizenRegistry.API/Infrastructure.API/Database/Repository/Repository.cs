@@ -34,5 +34,13 @@ namespace CitizenRegistry.API.Infrastructure.API.Database.Repository
         {
             throw new NotImplementedException();
         }
+
+        async Task<T> IRepository<T>.AddAsync(T entity)
+        {
+            await _set.AddAsync(entity);
+            await _context.SaveChangesAsync();
+
+            return entity;
+        }
     }
 }

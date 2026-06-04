@@ -11,28 +11,39 @@ namespace CitizenRegistry.API.Application.API.Services
             _repository = repository;
         }
 
-        public async Task CreateCitizenAsync(Citizen citizen)
+        public async Task<Citizen> CreateCitizenAsync(Citizen citizen)
         {
-            try
-            {
-                await _repository.AddAsync(citizen);
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-            
+            var existingCitizen = await _repository.GetCitizenByCpfAsync(citizen.Cpf);
+
+            if (existingCitizen != null)
+                throw new InvalidOperationException("Cidadão já cadastrado no sistema.");
+
+            return await _repository.AddAsync(citizen);
         }
+
 
         public async Task<Citizen?> GetCitizenByIdAsync(Guid? id)
         {
-           return await _repository.GetByIdAsync(id);
+            var citizen = await _repository.GetByIdAsync(id);
+
+            return citizen;
         }
 
         public async Task<IEnumerable<Citizen>> GetAllCitizensAsync()
         {
             return await _repository.GetAllAsync();
         }
+
+        public async Task<IEnumerable<Citizen>> GetCitizensByNameAsync(string? name)
+        {
+            return await _repository.GetCitizenByNameAsync(name);
+        }
+
+        public async Task<Citizen?> GetCitizenByCpfAsync(string? cpf)
+        {
+            return await _repository.GetCitizenByCpfAsync(cpf);
+        }
+
         public Task DeleteCitizenAsync(Guid id)
         {
             throw new NotImplementedException();
