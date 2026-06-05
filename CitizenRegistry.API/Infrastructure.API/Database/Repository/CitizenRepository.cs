@@ -1,4 +1,4 @@
-﻿using CitizenRegistry.API.Domain.API.Entities;
+using CitizenRegistry.API.Domain.API.Entities;
 using CitizenRegistry.API.Domain.API.Interfaces;
 using CitizenRegistry.API.Infrastructure.API.Database.Context;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +19,10 @@ namespace CitizenRegistry.API.Infrastructure.API.Database.Repository
 
         public async Task<IEnumerable<Citizen>> GetCitizenByNameAsync(string? name)
         {
-            var query = _context.Citizens.AsQueryable().Where(c => c.Name == name);
+            if (string.IsNullOrEmpty(name))
+                return await _context.Citizens.ToListAsync();
+
+            var query = _context.Citizens.AsQueryable().Where(c => c.Name != null && c.Name.Contains(name));
             return await query.ToListAsync();
         }
     }
