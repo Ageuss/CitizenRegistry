@@ -59,7 +59,7 @@ namespace CitizenRegistry.API.Controllers
                 var citizen = await _citizenService.GetCitizenByIdAsync(id);
 
                 if (citizen == null)
-                    NotFound("Cidadão não encontrado");
+                    return NotFound("Cidadão não encontrado");
 
                 var response = new CitizenResponseDTO
                 {
