@@ -35,12 +35,20 @@ docker-compose up -d
 ```
 *O banco estará pronto e rodando na porta padrão `1433`.*
 
-### Passo 2: Executar o Backend (API .NET)
+### Passo 2: Aplicar Migrations e Executar o Backend (API .NET)
 1. Navegue até a pasta da API:
    ```bash
    cd CitizenRegistry.API
    ```
-2. Execute o projeto do backend:
+2. Caso ainda não possua a ferramenta do EF Core, instale-a globalmente:
+   ```bash
+   dotnet tool install --global dotnet-ef
+   ```
+3. Aplique as migrations no banco de dados para criar as tabelas:
+   ```bash
+   dotnet ef database update
+   ```
+4. Execute o projeto do backend:
    ```bash
    dotnet run
    ```
