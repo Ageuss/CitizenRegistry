@@ -427,3 +427,20 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+
+CitizenRegistry.Web/dist/
+CitizenRegistry.Web/tmp/
+CitizenRegistry.Web/out-tsc/
+CitizenRegistry.Web/.angular/
+CitizenRegistry.Web/node_modules/
+CitizenRegistry.Web/.vscode/
+CitizenRegistry.Web/npm-debug.log*
+CitizenRegistry.Web/yarn-debug.log*
+CitizenRegistry.Web/yarn-error.log*
+CitizenRegistry.Web/pnpm-debug.log*
+
+# Limpeza e compilação redundante do .NET
+**/[Bb]in/
+**/[Oo]bj/
+*.user
