@@ -72,7 +72,7 @@ docker-compose up -d
 
 ---
 
-## 🔗 Endereços de Acesso
+## 🔗 Endereços de Acesso (Localmente)
 * **Interface da Aplicação (Frontend):** [http://localhost:4200/](http://localhost:4200/)
 * **Documentação da API (Swagger):** [http://localhost:5052/swagger/index.html](http://localhost:5052/swagger/index.html)
 
